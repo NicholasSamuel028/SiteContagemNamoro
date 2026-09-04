@@ -2,8 +2,7 @@ const inicioNamoro = new Date("2025-06-18T00:00:00");
 const dataConhecimento = new Date("2025-04-20T00:00:00");
 const natal = new Date("2025-12-25T00:00:00");
 
-function formatarTempo(dataInicial) {
-  const agora = new Date();
+function formatarTempo(dataInicial, agora) {
   let diff = agora - dataInicial;
 
   const segundos = Math.floor(diff / 1000) % 60;
@@ -17,8 +16,7 @@ function formatarTempo(dataInicial) {
   return `${anos} anos, ${meses} meses, ${diasRestantes} dias, ${horas}h ${minutos}min ${segundos}s`;
 }
 
-function calcularContagemRegressiva(dataFutura) {
-  const agora = new Date();
+function calcularContagemRegressiva(dataFutura, agora) {
   const diff = dataFutura - agora;
 
   if (diff <= 0) return "🎉 Já passou! Que lembrança linda!";
@@ -32,9 +30,10 @@ function calcularContagemRegressiva(dataFutura) {
 }
 
 function atualizarTemporizadores() {
-  document.getElementById("tempoNamoro").textContent = formatarTempo(inicioNamoro);
-  document.getElementById("tempoConhecimento").textContent = formatarTempo(dataConhecimento);
-  document.getElementById("contagemNatal").textContent = calcularContagemRegressiva(natal);
+  const agora = new Date();
+  document.getElementById("tempoNamoro").textContent = formatarTempo(inicioNamoro, agora);
+  document.getElementById("tempoConhecimento").textContent = formatarTempo(dataConhecimento, agora);
+  document.getElementById("contagemNatal").textContent = calcularContagemRegressiva(natal, agora);
 }
 
 setInterval(atualizarTemporizadores, 1000);
