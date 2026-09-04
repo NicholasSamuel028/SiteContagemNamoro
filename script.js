@@ -32,9 +32,14 @@ function calcularContagemRegressiva(dataFutura) {
 }
 
 function atualizarTemporizadores() {
-  document.getElementById("tempoNamoro").textContent = formatarTempo(inicioNamoro);
-  document.getElementById("tempoConhecimento").textContent = formatarTempo(dataConhecimento);
-  document.getElementById("contagemNatal").textContent = calcularContagemRegressiva(natal);
+  const tempoNamoroEl = document.getElementById("tempoNamoro");
+  if (tempoNamoroEl) tempoNamoroEl.textContent = formatarTempo(inicioNamoro);
+
+  const tempoConhecimentoEl = document.getElementById("tempoConhecimento");
+  if (tempoConhecimentoEl) tempoConhecimentoEl.textContent = formatarTempo(dataConhecimento);
+
+  const contagemNatalEl = document.getElementById("contagemNatal");
+  if (contagemNatalEl) contagemNatalEl.textContent = calcularContagemRegressiva(natal);
 }
 
 setInterval(atualizarTemporizadores, 1000);
@@ -47,4 +52,13 @@ function trocarTema() {
   } else {
     document.documentElement.setAttribute("data-theme", "dark");
   }
+}
+
+// Export functions for testing if in Node.js environment
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = {
+    formatarTempo,
+    calcularContagemRegressiva,
+    atualizarTemporizadores
+  };
 }
