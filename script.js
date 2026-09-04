@@ -2,20 +2,14 @@ const inicioNamoro = new Date("2025-06-18T00:00:00");
 const dataConhecimento = new Date("2025-04-20T00:00:00");
 const natal = new Date("2025-12-25T00:00:00");
 
-function extrairComponentesTempo(diff) {
-  return {
-    segundos: Math.floor(diff / 1000) % 60,
-    minutos: Math.floor(diff / (1000 * 60)) % 60,
-    horas: Math.floor(diff / (1000 * 60 * 60)) % 24,
-    dias: Math.floor(diff / (1000 * 60 * 60 * 24))
-  };
-}
-
 function formatarTempo(dataInicial) {
   const agora = new Date();
   let diff = agora - dataInicial;
 
-  const { segundos, minutos, horas, dias } = extrairComponentesTempo(diff);
+  const segundos = Math.floor(diff / 1000) % 60;
+  const minutos = Math.floor(diff / (1000 * 60)) % 60;
+  const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
   const anos = Math.floor(dias / 365);
   const meses = Math.floor((dias % 365) / 30);
   const diasRestantes = dias - (anos * 365 + meses * 30);
@@ -29,15 +23,22 @@ function calcularContagemRegressiva(dataFutura) {
 
   if (diff <= 0) return "🎉 Já passou! Que lembrança linda!";
 
-  const { segundos, minutos, horas, dias } = extrairComponentesTempo(diff);
+  const segundos = Math.floor(diff / 1000) % 60;
+  const minutos = Math.floor(diff / (1000 * 60)) % 60;
+  const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
 
   return `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
 }
 
+const elTempoNamoro = document.getElementById("tempoNamoro");
+const elTempoConhecimento = document.getElementById("tempoConhecimento");
+const elContagemNatal = document.getElementById("contagemNatal");
+
 function atualizarTemporizadores() {
-  document.getElementById("tempoNamoro").textContent = formatarTempo(inicioNamoro);
-  document.getElementById("tempoConhecimento").textContent = formatarTempo(dataConhecimento);
-  document.getElementById("contagemNatal").textContent = calcularContagemRegressiva(natal);
+  elTempoNamoro.textContent = formatarTempo(inicioNamoro);
+  elTempoConhecimento.textContent = formatarTempo(dataConhecimento);
+  elContagemNatal.textContent = calcularContagemRegressiva(natal);
 }
 
 setInterval(atualizarTemporizadores, 1000);
