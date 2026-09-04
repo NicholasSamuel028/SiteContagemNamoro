@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/NicholasSamuel028/SiteContagemNamoro#readme",
   "devDependencies": {
-    "jest": "^30.5.1"
+    "jest": "^30.5.1",
+    "jest-environment-jsdom": "^30.5.1"
   }
 }
