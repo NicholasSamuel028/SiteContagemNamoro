@@ -36,8 +36,10 @@ function atualizarTemporizadores() {
   document.getElementById("contagemNatal").textContent = calcularContagemRegressiva(natal, agora);
 }
 
-setInterval(atualizarTemporizadores, 1000);
-atualizarTemporizadores();
+if (typeof process === 'undefined' || process.env.NODE_ENV !== 'test') {
+  setInterval(atualizarTemporizadores, 1000);
+  atualizarTemporizadores();
+}
 
 function trocarTema() {
   const atual = document.documentElement.getAttribute("data-theme");
@@ -46,4 +48,8 @@ function trocarTema() {
   } else {
     document.documentElement.setAttribute("data-theme", "dark");
   }
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { formatarTempo, calcularContagemRegressiva, atualizarTemporizadores, trocarTema };
 }
