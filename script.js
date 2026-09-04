@@ -31,10 +31,14 @@ function calcularContagemRegressiva(dataFutura) {
   return `${dias} dias, ${horas}h ${minutos}min ${segundos}s`;
 }
 
+const elTempoNamoro = document.getElementById("tempoNamoro");
+const elTempoConhecimento = document.getElementById("tempoConhecimento");
+const elContagemNatal = document.getElementById("contagemNatal");
+
 function atualizarTemporizadores() {
-  document.getElementById("tempoNamoro").textContent = formatarTempo(inicioNamoro);
-  document.getElementById("tempoConhecimento").textContent = formatarTempo(dataConhecimento);
-  document.getElementById("contagemNatal").textContent = calcularContagemRegressiva(natal);
+  elTempoNamoro.textContent = formatarTempo(inicioNamoro);
+  elTempoConhecimento.textContent = formatarTempo(dataConhecimento);
+  elContagemNatal.textContent = calcularContagemRegressiva(natal);
 }
 
 setInterval(atualizarTemporizadores, 1000);
