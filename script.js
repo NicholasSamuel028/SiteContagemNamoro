@@ -48,3 +48,5 @@ function trocarTema() {
     document.documentElement.setAttribute("data-theme", "dark");
   }
 }
+
+if (typeof module !== "undefined") { module.exports = { calcularContagemRegressiva }; }
